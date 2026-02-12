@@ -126,11 +126,24 @@ source .venv/bin/activate
 python -m src.main --transport sse --port 8000
 ```
 
+**Streamable HTTP mode** (for MCP Inspector and modern clients):
+```bash
+source .venv/bin/activate
+python -m src.main --transport streamable-http --port 8000
+```
+
 **MCP Inspector** (interactive testing):
 ```bash
 source .venv/bin/activate
 mcp dev src/main.py
 ```
+
+> **Tip:** You can also use the included `run_server.sh` script which automatically activates the virtual environment:
+> ```bash
+> ./run_server.sh                              # stdio (default)
+> ./run_server.sh --transport sse --port 8000  # SSE
+> ./run_server.sh --transport streamable-http  # Streamable HTTP
+> ```
 
 ### 7. Claude Desktop configuration
 

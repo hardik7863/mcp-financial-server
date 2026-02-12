@@ -149,7 +149,7 @@ def main():
     parser = argparse.ArgumentParser(description="MCP Financial Server")
     parser.add_argument(
         "--transport",
-        choices=["stdio", "sse"],
+        choices=["stdio", "sse", "streamable-http"],
         default=None,
         help="Transport mode (default: from MCP_TRANSPORT env var or stdio)",
     )
@@ -168,11 +168,11 @@ def main():
 
     logger.info(f"Starting MCP Financial Server (transport={transport})")
 
-    if transport == "sse":
+    if transport in ("sse", "streamable-http"):
         mcp.settings.host = host
         mcp.settings.port = port
-        logger.info(f"SSE endpoint: http://{host}:{port}/sse")
-        mcp.run(transport="sse")
+        logger.info(f"{transport} endpoint: http://{host}:{port}/")
+        mcp.run(transport=transport)
     else:
         mcp.run(transport="stdio")
 
